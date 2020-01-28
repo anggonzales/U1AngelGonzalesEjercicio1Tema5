@@ -59,8 +59,6 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
     List<LatLng> latLngListPosgrado = new ArrayList<>();
     List<Marker> markerListPosgrado = new ArrayList<>();
 
-    int rojo = 0, verde = 0, azul = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,28 +158,28 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
             PolygonOptions polygonOptions = new PolygonOptions()
                     .addAll(latLngList).clickable(true);
             polygon_rectorado = mapa.addPolygon(polygonOptions);
-            polygon_rectorado.setStrokeColor(Color.rgb(rojo, verde, azul));
+            polygon_rectorado.setStrokeColor(Color.rgb(179, 95, 12));
         }
 
         if (!latLngListCampus.isEmpty()) {
             PolygonOptions polygonOptions = new PolygonOptions()
                     .addAll(latLngListCampus).clickable(true);
             polygon_campus = mapa.addPolygon(polygonOptions);
-            polygon_campus.setStrokeColor(Color.rgb(rojo, verde, azul));
+            polygon_campus.setStrokeColor(Color.rgb(69, 255, 91));
         }
 
         if (!latLngListAdmision.isEmpty()) {
             PolygonOptions polygonOptions = new PolygonOptions()
                     .addAll(latLngListAdmision).clickable(true);
             polygon_admision = mapa.addPolygon(polygonOptions);
-            polygon_admision.setStrokeColor(Color.rgb(rojo, verde, azul));
+            polygon_admision.setStrokeColor(Color.rgb(255, 150, 43));
         }
 
         if (!latLngListPosgrado.isEmpty()) {
             PolygonOptions polygonOptions = new PolygonOptions()
                     .addAll(latLngListPosgrado).clickable(true);
             polygon_posgrado = mapa.addPolygon(polygonOptions);
-            polygon_posgrado.setStrokeColor(Color.rgb(rojo, verde, azul));
+            polygon_posgrado.setStrokeColor(Color.rgb(71, 14, 204));
         }
     }
 
