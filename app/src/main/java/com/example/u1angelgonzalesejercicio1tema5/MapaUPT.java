@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,7 +24,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnInfoWindowLongClickListener {
     GoogleMap mapa;
     LatLng ubicacion_rectorado;
     LatLng ubicacion_rectorado_1;
@@ -59,6 +60,7 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
 
     List<LatLng> latLngListPosgrado = new ArrayList<>();
     List<Marker> markerListPosgrado = new ArrayList<>();
+    ArrayList<Marker> markers = new ArrayList<>();
 
     Button btncentrar, btnposgrado, btnrectorado, btnadmision, btncampus;
 
@@ -87,30 +89,57 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
             @Override
             public void onClick(View view) {
 
-                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.009265, -70.242981), 20));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.009282, -70.242908), 20));
                 CameraPosition position = mapa.getCameraPosition();
                 float zoom = position.zoom;
+                mapa.addMarker(new MarkerOptions()
+                        .position(mapa.getCameraPosition().target)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.rectorado))
+                        .title("Rectorado UPT")
+                        .snippet("Rectorado"));
+
             }
         });
 
         btnposgrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005197, -70.235027), 18));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005058, -70.235099), 18));
+                mapa.addMarker(new MarkerOptions()
+                        .position(mapa.getCameraPosition().target)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.posgrado))
+                        .title("Posgrado UPT")
+                        .snippet("Posgrado"));
             }
         });
 
         btnadmision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013515, -70.250327), 20));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013522, -70.250260), 20));
+                mapa.addMarker(new MarkerOptions()
+                        .position(mapa.getCameraPosition().target)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.posgrado))
+                        .title("Admision UPT")
+                        .snippet("Admision"));
+                        //.snippet("https://www.google.com/maps/place/Instituto+Telesup/@-18.0134241,-70.2502144,21z/data=!4m5!3m4!1s0x915acf65a8f8c66d:0x2aa34c7bd8c6ac97!8m2!3d-18.0135324!4d-70.2502479"));
             }
         });
 
         btncampus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005674, -70.225914), 18));
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005694, -70.225477), 18));
+                mapa.addMarker(new MarkerOptions()
+                        .position(mapa.getCameraPosition().target)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.campus))
+                        .title("Campus UPT")
+                        .snippet("Campus Capanique"));
+                /*markers.add(mapa.addMarker(new MarkerOptions()
+                        .position(mapa.getCameraPosition().target)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.campus))
+                        .title("Marker onMapClick")
+                        .snippet("Este marker es producto del evento de pulsar en el mapa")));*/
             }
         });
     }
@@ -135,6 +164,8 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
         markerList.add(marker);
         markerList.add(marker1);
         markerList.add(marker2);
+
+        //Marker encerrado
 
         //Campus
 
@@ -224,6 +255,14 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
 
 
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013240, -70.250091), 13));
+        mapa.setOnInfoWindowLongClickListener(this);
+    }
+
+    @Override
+    public void onInfoWindowLongClick(Marker markerListCampus) {
+        WebView web = new WebView(this);
+        setContentView(web);
+        web.loadUrl("https://www.google.com/maps/place/Instituto+Telesup/@-18.0134241,-70.2502144,21z/data=!4m5!3m4!1s0x915acf65a8f8c66d:0x2aa34c7bd8c6ac97!8m2!3d-18.0135324!4d-70.2502479");
     }
 
     public void moveCamera(View view) {
