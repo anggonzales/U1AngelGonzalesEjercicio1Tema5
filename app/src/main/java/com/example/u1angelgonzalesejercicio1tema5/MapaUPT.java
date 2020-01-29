@@ -13,6 +13,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -59,20 +60,59 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
     List<LatLng> latLngListPosgrado = new ArrayList<>();
     List<Marker> markerListPosgrado = new ArrayList<>();
 
+    Button btncentrar, btnposgrado, btnrectorado, btnadmision, btncampus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_upt);
+        btncentrar = findViewById(R.id.btncentrar);
+        btnposgrado = findViewById(R.id.btnposgrado);
+        btnrectorado = findViewById(R.id.btnrectorado);
+        btnadmision = findViewById(R.id.btnadmision);
+        btncampus = findViewById(R.id.btncampus);
+
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.mapa);
         mapFragment.getMapAsync(this);
 
-        /*if (!latLngList.isEmpty()) {
-            PolygonOptions polygonOptions = new PolygonOptions()
-                    .addAll(latLngList).clickable(true);
-            polygon = mapa.addPolygon(polygonOptions);
-            polygon.setStrokeColor(Color.rgb(rojo, verde, azul));
-        }*/
+        btncentrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013240, -70.250091), 13));
+            }
+        });
+
+        btnrectorado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.009265, -70.242981), 20));
+                CameraPosition position = mapa.getCameraPosition();
+                float zoom = position.zoom;
+            }
+        });
+
+        btnposgrado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005197, -70.235027), 18));
+            }
+        });
+
+        btnadmision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013515, -70.250327), 20));
+            }
+        });
+
+        btncampus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.005674, -70.225914), 18));
+            }
+        });
     }
 
     @Override
@@ -181,6 +221,9 @@ public class MapaUPT extends FragmentActivity implements OnMapReadyCallback, Goo
             polygon_posgrado = mapa.addPolygon(polygonOptions);
             polygon_posgrado.setStrokeColor(Color.rgb(71, 14, 204));
         }
+
+
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-18.013240, -70.250091), 13));
     }
 
     public void moveCamera(View view) {

@@ -21,6 +21,7 @@
                 android:orientation="horizontal"
                 android:gravity="bottom">
                 <Button
+                    android:id="@+id/btncentrar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -28,8 +29,9 @@
                     android:textColor="#fff"
                     android:layout_gravity="center"
                     android:onClick="moveCamera"
-                    android:text="ir a Tacna"/>
+                    android:text="Centrar"/>
                 <Button
+                    android:id="@+id/btnposgrado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -37,16 +39,36 @@
                     android:textColor="#fff"
                     android:layout_gravity="center"
                     android:onClick="addMarker"
-                    android:text="Marcador"/>
+                    android:text="Posgrado"/>
                 <Button
-                    android:id="@+id/btnagregar"
+                    android:id="@+id/btncampus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/colorPrimaryDark"
                     android:textColor="#fff"
                     android:layout_gravity="center"
-                    android:text="Marcador"/>
+                    android:text="Campus"/>
+
+                <Button
+                    android:id="@+id/btnadmision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="#fff"
+                    android:layout_gravity="center"
+                    android:text="Admisión"/>
+
+                <Button
+                    android:id="@+id/btnrectorado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="#fff"
+                    android:layout_gravity="center"
+                    android:text="Rectorado"/>
             </LinearLayout>
         </LinearLayout>
     </fragment>
